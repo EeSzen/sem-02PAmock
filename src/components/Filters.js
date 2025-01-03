@@ -1,18 +1,7 @@
 import React from "react";
-// import { fetchPokemons, fetchTypes } from "../utils/api";
-import { useState, useEffect } from "react";
 
 function Filters(props) {
   const { search, type, types, onSearchChange, onTypeChange } = props;
-
-  const [option, setOption] = useState("all");
-  // const [allTypes, setAllTypes] = useState([]);
-
-  useEffect(() => {
-    if (types.length > 0) {
-      setOption(types);
-    }
-  }, [types]);
 
   // Handle search change
   const handleSearchChange = (e) => {
@@ -23,22 +12,21 @@ function Filters(props) {
   // Handle type change
   const handleTypeChange = (e) => {
     onTypeChange(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
     <div className="filters">
       {/* INSTRUCTION: Add a text input for searching by name */}
-      <form>
-        <input
-          value={search}
-          onChange={handleSearchChange}
-          placeholder="Search by Name"
-        ></input>
-      </form>
+      <input
+        value={search}
+        onChange={handleSearchChange}
+        placeholder="Search by Name"
+      ></input>
 
       {/* INSTRUCTION: Add a select field for filtering by type */}
       <select value={type} onChange={handleTypeChange} label="Types">
-        <option value={"all"}>All Types</option>
+        <option value={""}>All Types</option>
         {types.map((typeItem, index) => (
           <option key={index} value={typeItem}>
             {typeItem}

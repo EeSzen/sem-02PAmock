@@ -7,11 +7,13 @@ const API_URL = "http://localhost:5554";
     - Create a function to fetch pokemons from the API. 
     - API call may include query parameters for search and type.
 */
-export const fetchPokemons = async (search = "", type = "all") => {
+export const fetchPokemons = async (search = "", type = "") => {
   try {
+    console.log(type);
     const response = await axios.get(
-      API_URL + "/pokemons?search=" + search + "&?type=" + type
+      API_URL + "/pokemons?search=" + search + "&type=" + type
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

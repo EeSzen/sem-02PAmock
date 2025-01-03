@@ -7,9 +7,8 @@ import PokemonGrid from "./components/PokemonGrid";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("all");
+  const [type, setType] = useState("");
   /* INSTRUCTION: Create a state for pokemons and types */
-  // const [oripokemon, setOriPokemon] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [types, setTypes] = useState([]);
   /* 
@@ -17,12 +16,14 @@ function App() {
         - Use the useEffect hook to fetch pokemons. 
     */
   useEffect(() => {
-    fetchPokemons().then((data) => {
+    fetchPokemons(search, type).then((data) => {
       // setOriPokemon(data);
       setPokemons(data);
       console.log(data);
     });
-  }, []);
+  }, [search, type]);
+
+
 
   /* INSTRUCTION: Use the useEffect hook to fetch types */
   useEffect(() => {
@@ -31,7 +32,7 @@ function App() {
       // console.log(listData);
     });
   }, []);
-  
+
   /* INSTRUCTION: Create functions to handle search change */
   const handleSearchChange = (searchWord) => {
     setSearch(searchWord);
@@ -42,21 +43,6 @@ function App() {
     setType(newType);
     console.log(newType);
   };
-
-  // useEffect(() => {
-  //   let filteredPokemon = [...oripokemon];
-  //   if (search) {
-  //     filteredPokemon = filteredPokemon.filter((data) =>
-  //       data.name.toLowerCase().includes(search.toLowerCase())
-  //     );
-  //   }
-
-  //   if (type && type !== "all") {
-  //     filteredPokemon = filteredPokemon.filter((data) => data.type === type);
-  //   }
-  //   console.log(filteredPokemon);
-  //   setPokemon(filteredPokemon);
-  // }, [search, type]);
 
   return (
     <div className="app">
